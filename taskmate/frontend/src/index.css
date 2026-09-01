@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-board text-paper font-body antialiased;
+}
+
+::selection {
+  background-color: #ff6a1a;
+  color: #131b2e;
+}
+
+/* Visible keyboard focus everywhere — accessibility floor */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid #ff6a1a;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@layer components {
+  /* The signature visual element: a physical work-order ticket.
+     Torn/perforated left edge via a repeating radial-gradient mask,
+     stub notches top-right and bottom-right like a receipt. */
+  .ticket {
+    @apply relative bg-paper text-ink rounded-sm shadow-ticket;
+    background-image: radial-gradient(circle at 0 50%, transparent 9px, #f3eedf 9.5px);
+  }
+
+  .ticket::before,
+  .ticket::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    width: 16px;
+    height: 16px;
+    background: #131b2e;
+    border-radius: 50%;
+  }
+  .ticket::before {
+    top: -8px;
+  }
+  .ticket::after {
+    bottom: -8px;
+  }
+
+  /* Ink-stamp status badge, slightly rotated like a real rubber stamp */
+  .stamp {
+    @apply inline-flex items-center gap-1.5 border-2 rounded-sm px-2.5 py-1 font-mono text-xs font-semibold uppercase tracking-wide;
+    transform: rotate(-3deg);
+  }
+
+  .stamp-open {
+    @apply border-signal text-signal;
+  }
+  .stamp-assigned {
+    @apply border-teal text-teal;
+  }
+  .stamp-done {
+    @apply border-paper-dim text-paper-dim;
+  }
+  .stamp-cancelled {
+    @apply border-stamp text-stamp;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-signal text-board font-display font-semibold px-6 py-3 rounded-sm
+      hover:bg-signal-dark transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 border-2 border-paper text-paper font-display font-semibold px-6 py-3 rounded-sm
+      hover:bg-paper hover:text-board transition-colors duration-150;
+  }
+
+  .field {
+    @apply w-full bg-board-raised border border-board-line text-paper placeholder-paper-dim/50 rounded-sm px-4 py-3
+      focus:border-signal outline-none transition-colors duration-150;
+  }
+}

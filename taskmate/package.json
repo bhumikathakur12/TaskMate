@@ -1,0 +1,13 @@
+{
+  "name": "taskmate",
+  "version": "1.0.0",
+  "description": "A daily task marketplace — post small jobs (pickups, cleaning, deliveries, repairs, errands) with the price you're willing to pay. Nearby people bid to do them, you pick one, funds are held in a simulated escrow, and released once the job's confirmed done.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
